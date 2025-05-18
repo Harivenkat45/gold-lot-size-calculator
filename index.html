@@ -16,6 +16,17 @@
       -moz-appearance: textfield;
     }
 
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px #6a1b9a; }
+      50% { box-shadow: 0 0 20px #6a1b9a; }
+      100% { box-shadow: 0 0 5px #6a1b9a; }
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #e0f7fa, #e1bee7);
@@ -24,40 +35,53 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      animation: fadeIn 1s ease-in-out;
     }
     .container {
       background: #ffffff;
       padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      width: 320px;
-      transition: transform 0.3s ease;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      width: 360px;
+      animation: fadeIn 1s ease forwards;
     }
     .container:hover {
       transform: translateY(-5px);
+      transition: transform 0.3s ease;
+    }
+    h1 {
+      text-align: center;
+      color: #4a0072;
+      margin-bottom: 5px;
+      font-size: 1.7em;
+      animation: fadeIn 1s ease-in-out;
     }
     h2 {
       text-align: center;
       margin-bottom: 20px;
       color: #6a1b9a;
+      animation: fadeIn 1.2s ease-in-out;
     }
     label {
       font-weight: 600;
       display: block;
       margin-top: 10px;
+      animation: fadeIn 1.4s ease-in-out;
     }
     input, button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 6px;
       font-size: 1em;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+      animation: fadeIn 1.6s ease-in-out;
     }
     input:focus {
       border-color: #6a1b9a;
       outline: none;
+      animation: glow 2s infinite;
     }
     button {
       background-color: #6a1b9a;
@@ -65,10 +89,13 @@
       font-weight: bold;
       border: none;
       margin-top: 20px;
-      transition: background-color 0.3s ease;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      animation: fadeIn 1.8s ease-in-out;
     }
     button:hover {
       background-color: #4a0072;
+      transform: scale(1.05);
     }
     .result {
       text-align: center;
@@ -76,22 +103,24 @@
       font-weight: bold;
       font-size: 1.2em;
       color: #2e7d32;
+      animation: fadeIn 2s ease-in-out;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Lot Size Calculator</h2>
-    <label>Entry Price</label>
-    <input type="number" id="entry_price"  placeholder="e.g. 3300.567" />
+    <h1>✨ Das and Co Traders ✨</h1>
+    <h2>📊 Gold Lot Size Calculator 📈</h2>
+    <label>💰 Entry Price</label>
+    <input type="number" id="entry_price" placeholder="e.g. 3300.567" />
 
-    <label>Stoploss</label>
-    <input type="number" id="stoploss"  placeholder="e.g. 3280.123" />
+    <label>🛑 Stoploss</label>
+    <input type="number" id="stoploss" placeholder="e.g. 3280.123" />
 
-    <label>Risk %</label>
-    <input type="number" id="risk_percent"  placeholder="e.g. 2" />
+    <label>⚠️ Risk %</label>
+    <input type="number" id="risk_percent" placeholder="e.g. 2" />
 
-    <button onclick="calculateLot()">Calculate Lot Size</button>
+    <button onclick="calculateLot()">🚀 Calculate Lot Size</button>
 
     <div class="result" id="result"></div>
   </div>
