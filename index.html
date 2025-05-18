@@ -5,43 +5,77 @@
   <title>Lot Size Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
+    /* Remove up/down arrows from input type number */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e1bee7);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
     .container {
-      background: #fff;
+      background: #ffffff;
       padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 300px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      transition: transform 0.3s ease;
+    }
+    .container:hover {
+      transform: translateY(-5px);
     }
     h2 {
       text-align: center;
+      margin-bottom: 20px;
+      color: #6a1b9a;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 10px;
     }
     input, button {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin-top: 6px;
       font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    input:focus {
+      border-color: #6a1b9a;
+      outline: none;
     }
     button {
-      background-color: #28a745;
+      background-color: #6a1b9a;
       color: white;
+      font-weight: bold;
       border: none;
-      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #218838;
+      background-color: #4a0072;
     }
     .result {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 15px;
       font-weight: bold;
+      font-size: 1.2em;
+      color: #2e7d32;
     }
   </style>
 </head>
@@ -49,13 +83,13 @@
   <div class="container">
     <h2>Lot Size Calculator</h2>
     <label>Entry Price</label>
-    <input type="number" id="entry_price" step="0.001" placeholder="e.g. 1.234" />
-    
+    <input type="number" id="entry_price"  placeholder="e.g. 3300.567" />
+
     <label>Stoploss</label>
-    <input type="number" id="stoploss" step="0.001" placeholder="e.g. 1.220" />
-    
+    <input type="number" id="stoploss"  placeholder="e.g. 3280.123" />
+
     <label>Risk %</label>
-    <input type="number" id="risk_percent" step="0.01" placeholder="e.g. 2" />
+    <input type="number" id="risk_percent"  placeholder="e.g. 2" />
 
     <button onclick="calculateLot()">Calculate Lot Size</button>
 
@@ -74,7 +108,7 @@
       }
 
       const sl_diff = +(entryPrice - stoploss).toFixed(3);
-      const sl_pips = Math.abs(parseInt(sl_diff * 100));  // abs for safety
+      const sl_pips = Math.abs(parseInt(sl_diff * 100));
       if (sl_pips === 0) {
         document.getElementById('result').innerText = "Stoploss and entry too close.";
         return;
